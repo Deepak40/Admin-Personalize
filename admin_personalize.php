@@ -2,7 +2,7 @@
 /**
  * Plugin Name:        Admin Personalize
  * Plugin URI:         http://www.ranosys.com/
- * Description:        Allows you to configure WordPress logo on login and register page and WordPress icon on WordPress dashboard, Hide WordPress setup version number and configure the default email address and name used for emails sent by WordPress
+ * Description:        Allows you to configure WordPress logo on login and register page and WordPress icon on WordPress dashboard, Remove WordPress setup version number, Hide WordPress Admin Bar and configure the default email address and name used for emails sent by WordPress
  * Version:            1.0
  * Author:             Deepak Soni
  * Author URI:         https://github.com/Deepak40/
