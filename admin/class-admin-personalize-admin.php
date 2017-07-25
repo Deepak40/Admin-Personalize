@@ -106,6 +106,8 @@ class Admin_Personalize_Admin {
      * Settings API.
      *
      * @since  1.0
+     * 
+     * updated on version 1.1
      */
     public function settings() {
 	add_settings_section(
@@ -134,6 +136,10 @@ class Admin_Personalize_Admin {
 	);
 
 	add_settings_field(
+		'admin_personalize_custom_css_for_wp_logo', __('WordPress Logo\'s Width', 'admin_personalize'), array($this, 'admin_personalize_custom_css_for_wp_logo_field'), 'admin_personalize', 'admin_personalize'
+	);
+
+	add_settings_field(
 		'admin_personalize_configure_wp_icon', __('Configure WordPress Icon', 'admin_personalize'), array($this, 'admin_personalize_configure_wp_icon_field'), 'admin_personalize', 'admin_personalize'
 	);
 
@@ -147,6 +153,8 @@ class Admin_Personalize_Admin {
 	register_setting('admin_personalize', 'admin_personalize_hide_admin_bar', 'absint');
 
 	register_setting('admin_personalize', 'admin_personalize_configure_wp_logo', 'image');
+
+	register_setting('admin_personalize', 'admin_personalize_custom_css_for_wp_logo', 'text');
 
 	register_setting('admin_personalize', 'admin_personalize_configure_wp_icon', 'image');
     }
@@ -241,7 +249,7 @@ class Admin_Personalize_Admin {
 	    ?>
 	    <img class="custom_media_image" src="<?php echo get_option('admin_personalize_configure_wp_logo'); ?>" 
 	         style="margin:0;padding:10px 0;max-width:100px;display:block" />
-	<?php } ?>
+	     <?php } ?>
 
 	<input type="text" class="img" name="admin_personalize_configure_wp_logo" id="admin-personalize-configure-wp-logo" value="<?php
 	if (!empty(get_option('admin_personalize_configure_wp_logo'))) {
@@ -250,9 +258,27 @@ class Admin_Personalize_Admin {
 	?>">
 
 	<input type="button" value="<?php _e('Upload Image', 'admin-personalize'); ?>" class="button select-img"  /><br/><br/>
-	
+
 	<?php
 	echo '<p>' . __('If set, this option will override the default WordPress logo on &quot;Login Panel&quot;.', 'admin-personalize') . '</p>';
+    }
+
+    /**
+     * Configure WP logo's width Field.
+     *
+     * @since  1.1
+     */
+    public function admin_personalize_custom_css_for_wp_logo_field() {
+	?>
+	<label for="admin-personalize-configure-wp-logo-width"></label>
+
+	<input type="number" name="admin_personalize_custom_css_for_wp_logo" id="admin-personalize-configure-wp-logo-width" value="<?php
+	       if (!empty(get_option('admin_personalize_custom_css_for_wp_logo'))) {
+		   echo get_option('admin_personalize_custom_css_for_wp_logo');
+	       }
+	       ?>"> <span> px </span>
+	<?php
+	echo '<p>' . __('If set, this option will override the default WordPress logo\'s width on &quot;Login Panel&quot;.<br> If you remain empty, then it will take 84px width, same as WordPress Logo.', 'admin-personalize') . '</p>';
 	echo '<span style="padding:20px 0px 40px 0px;"><hr></span>';
     }
 
@@ -269,15 +295,15 @@ class Admin_Personalize_Admin {
 	    ?>
 	    <img class="custom_media_image" src="<?php echo get_option('admin_personalize_configure_wp_icon'); ?>" 
 	         style="margin:0;padding:10px 0;max-width:100px;display:block" />
-	<?php } ?>
+	     <?php } ?>
 
 	<input type="text" class="img" name="admin_personalize_configure_wp_icon" id="admin-personalize-configure-wp-icon" value="<?php
-	if (!empty(get_option('admin_personalize_configure_wp_icon'))) {
-	    echo get_option('admin_personalize_configure_wp_icon');
-	}
-	?>">
+	     if (!empty(get_option('admin_personalize_configure_wp_icon'))) {
+		 echo get_option('admin_personalize_configure_wp_icon');
+	     }
+	     ?>">
 	<input type="button" value="<?php _e('Upload Image', 'admin-personalize'); ?>" class="button select-img"  /><br/><br/>
-	
+
 	<?php
 	echo '<p>' . __('If set, this option will override the default WordPress icon on &quot;Dashboard&quot;.', 'admin-personalize') . '</p>';
 	echo '<span style="padding:20px 0px 40px 0px;"><hr></span>';

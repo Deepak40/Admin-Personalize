@@ -4,7 +4,7 @@ Donate link: http://www.ranosys.com/
 Tags: mail from, from email, email from, from address, mail, email, smtp, from address, email address, from header, wordpress icon, wordpress logo, backend icon, backend logo, register form logo, login form logo
 Requires at least: 3.5
 Tested up to: 4.8
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,8 @@ It is an updated and fully re-worked version of the [WP Mail From](http://wordpr
 4. This plugin allows you to remove version no of WordPress by setting the *Remove Wordpress setup Information:* header.
 
 5. This Plugin allows you to hide Admin Bar from wordpress frontend.
+
+6. This plugin allows you to change width of WordPress custom logo on login panel.
 
 * Adds a "Admin Personalize" section in the "Settings" menu.
 * The plugin uses the filter hooks `admin_personalize_from` and `admin_personalize_from_name`.
@@ -73,6 +75,10 @@ Some hosts may refuse to relay mail from an unknown domain. See [http://trac.wor
 
 == Changelog ==
 
+= 1.1 =
+
+* Add options to change width of Wordpress logo on login panel.
+
 = 1.0 =
 
 * Add options to override default WordPress email address and admin email address.
@@ -92,6 +98,10 @@ Some hosts may refuse to relay mail from an unknown domain. See [http://trac.wor
 * Stores name and email as `admin_personalize_name` and `admin_personalize_email` options. Upgrade support provided for old options.
 
 == Upgrade Notice ==
+
+= 1.1 =
+
+* Added options to change width of Wordpress logo on login panel.
 
 = 1.0 =
 

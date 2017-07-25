@@ -15,7 +15,7 @@ class Admin_Personalize {
      *
      * @var    string
      */
-    const VERSION = '1.0';
+    const VERSION = '1.1';
 
     /**
      * Unique identifier for your plugin.
@@ -43,9 +43,18 @@ class Admin_Personalize {
      * Constructor
      *
      * @since  1.0
+     * 
+     * updated on version 1.1
      */
     private function __construct() {
 	add_action('init', array($this, 'load_plugin_textdomain'));
+
+	add_action('wp_before_admin_bar_render', array($this, 'admin_personalize_custom_wp_icon'));
+	add_action('login_enqueue_scripts', array($this, 'admin_personalize_custom_wp_logo'));
+	add_action('admin_enqueue_scripts', array($this, 'admin_personalize_image_upload_script'));
+
+	add_filter('the_generator', array($this, 'admin_personalize_remove_version'));
+	add_filter('show_admin_bar', array($this, 'admin_personalize_remove_admin_bar'));
 
 	// Name and email filter
 	add_filter('admin_personalize_from_name', array($this, 'admin_personalize_from_name'), 100);
@@ -214,9 +223,9 @@ class Admin_Personalize {
      * @since  1.0
      */
     public static function activate() {
-
 	// Copy values from original WP MailFrom if present and plugin optionsnot yet set.
 	// http://wordpress.org/plugins/wp-mailfrom/
+
 	$name = get_option('site_mail_from_name', '');
 	$email = get_option('site_mail_from_email', '');
 	$new_name = get_option('admin_personalize_name', '');
@@ -226,6 +235,99 @@ class Admin_Personalize {
 	    $name_updated = add_option('admin_personalize_name', $name);
 	if (!empty($email) && empty($new_email))
 	    $email_updated = add_option('admin_personalize_email', $email);
+    }
+
+    /**
+     * Configure WordPress icon
+     *
+     * @since  1.1
+     */
+    public function admin_personalize_custom_wp_icon() {
+	if (!empty(get_option('admin_personalize_configure_wp_icon'))) {
+	    ?>
+	    <style type="text/css">
+	        #wpadminbar #wp-admin-bar-wp-logo > .ab-item .ab-icon:before {
+	    	background-image: url('<?php echo get_option('admin_personalize_configure_wp_icon'); ?>') !important;
+	    	background-position: 0 0;
+	    	background-size: 100%;
+	    	color:rgba(0, 0, 0, 0);
+	        }
+	        #wpadminbar #wp-admin-bar-wp-logo.hover > .ab-item .ab-icon {
+	    	background-position: 0 0;
+	        }
+	    </style>
+	    <?php
+	}
+    }
+
+    /**
+     * Configure WordPress logo
+     *
+     * @since  1.1
+     */
+    public function admin_personalize_custom_wp_logo() {
+	if (!empty(get_option('admin_personalize_configure_wp_logo'))) {
+	    ?>
+	    <style type="text/css">
+	        body.login div#login h1 a {
+	    	background-size: 100%;
+	    	width:<?php
+		    if (!empty(get_option('admin_personalize_custom_css_for_wp_logo'))) {
+			echo get_option('admin_personalize_custom_css_for_wp_logo')."px";
+		    } else {
+			echo '84px';
+		    }
+		    ?>;
+	    	background-image: url("<?php echo get_option('admin_personalize_configure_wp_logo'); ?>"); 
+	        }
+	    </style>
+	    <?php
+	}
+    }
+
+    /**
+     * Remove WordPress Version
+     *
+     * @since  1.1
+     */
+    public function admin_personalize_remove_version() {
+	if (!empty(get_option('admin_personalize_remove_wp_version'))) {
+	    if (get_option('admin_personalize_hide_admin_bar') == 1) {
+		return '';
+	    }
+	}
+    }
+
+    /**
+     * Hide admin bar
+     *
+     * @since  1.1
+     */
+    public function admin_personalize_remove_admin_bar() {
+	if (!empty(get_option('admin_personalize_hide_admin_bar'))) {
+	    if (get_option('admin_personalize_hide_admin_bar') == 1) {
+		return false;
+	    } else {
+		return true;
+	    }
+	}
+    }
+
+    /**
+     *  For Image Uploading Script
+     *
+     * @since  1.1
+     */
+    public function admin_personalize_image_upload_script() {
+	if (empty($_GET['page']) || "admin-personalize" !== $_GET['page']) {
+	    return;
+	}
+	wp_enqueue_media();
+	wp_enqueue_style('thickbox');
+	wp_enqueue_script('media-upload');
+	wp_enqueue_script('thickbox');
+	wp_register_script('custom-script', plugins_url('/../assets/js/imageScript.js', __FILE__));
+	wp_enqueue_script('custom-script');
     }
 
 }
