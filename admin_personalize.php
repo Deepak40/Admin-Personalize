@@ -12,6 +12,7 @@
  * Domain Path:        /languages
  * GitHub Plugin URI:  https://github.com/Deepak40/Admin-Personalize
  */
+
 // If this file is called directly, abort.
 if (!defined('WPINC')) {
     die;

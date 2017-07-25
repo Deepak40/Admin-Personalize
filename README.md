@@ -50,7 +50,7 @@ get_option( 'admin_personalize_email' );`
 Frequently Asked Questions
 --------------------------
 
-How can I change width of WordPress logo on login panel?
+How can I change width of WordPress logo on WordPress login panel?
 
 By changing of width of WordPress custom Logo you can change width of logo on login panel. Default it's set to 84px as WordPress default logo.
 
