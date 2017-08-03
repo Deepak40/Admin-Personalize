@@ -1,6 +1,6 @@
 # Admin-Personalize
 
-Allows you to configure WordPress logo on login and register page and WordPress icon on WordPress dashboard, Remove WordPress setup version number, Hide WordPress Admin Bar and configure the default email address and name used for emails sent by WordPress.
+[Admin Personalize](https://wordpress.org/plugins/admin-personalize/) Allows you to configure WordPress logo on login and register page and WordPress icon on WordPress dashboard, Remove WordPress setup version number, Hide WordPress Admin Bar and configure the default email address and name used for emails sent by WordPress.
 
 Description
 ------------

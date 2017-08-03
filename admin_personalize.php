@@ -4,7 +4,7 @@
  * Plugin URI:         http://www.ranosys.com/
  * Description:        Allows you to configure WordPress logo on login and register page and WordPress icon on WordPress dashboard, Remove WordPress setup version number, Hide WordPress Admin Bar and configure the default email address and name used for emails sent by WordPress
  * Version:            1.1
- * Author:             Deepak Soni
+ * Author:             Deepak Soni (Ranosys Technologies Pte. Ltd.)
  * Author URI:         https://github.com/Deepak40/
  * Text Domain:        admin-personalize
  * License:            GPL-2.0+
